@@ -25,6 +25,8 @@ productCategory:<td>${pro.productCategory}</td>
 <br>
 pro.productSupplier:<td>${pro.productSupplier}</td>
 <br>
+product stock:-<td>${pro.stock }</td>
+<br>
 <td> <a href="viewdetails?proId=${pro.productId}">ViewDetails</a></td>
 <br>
 </div>

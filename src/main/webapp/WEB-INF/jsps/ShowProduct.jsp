@@ -30,6 +30,9 @@ ProductCategory
 ProductSupplier
 </th>
 <th>
+stock
+</th>
+<th>
 Product Images
 </th>
 <th>
@@ -48,6 +51,7 @@ Edit
 <td>${pro.productPrice}</td>
 <td>${pro.productCategory}</td>
 <td>${pro.productSupplier}</td>
+<td>${pro.stock }</td>
 <td><img src="resources/product-images/${pro.productId}.jpg" height="100" width="150"/>
 <td> <a href="pedit?proId=${pro.productId}">edit</a></td>
 <td> <a href="pdel?proId=${pro.productId}">delete</a></td>

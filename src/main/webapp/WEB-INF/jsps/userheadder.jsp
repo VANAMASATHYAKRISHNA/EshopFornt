@@ -23,7 +23,7 @@
       <li class="nav-item">
        <a class="navbar-brand" href="DisplayCart">Displaycart</a>
       <li class="nav-item">
-      <a class="navbar-brand" href="#">MyOrders</a>
+      <a class="navbar-brand" href="myorder">MyOrders</a>
       <li class="nav-item">
       <a class="navbar-brand" href="Registration">Registration</a>
       <li class="nav-item">
