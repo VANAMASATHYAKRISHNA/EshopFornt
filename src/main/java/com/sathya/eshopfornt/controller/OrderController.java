@@ -56,25 +56,18 @@ public ModelAndView recieveShippingAddressFormData(@ModelAttribute("ship") Shipp
   	for(Cart c:cartlist)
   	{
   	grandTotal=c.getTotalprice()+grandTotal;
+  	int productid=	c.getProductId();
+  	 Product product=     productDaoImpl.getProduct(productid);
+  	int stock=product.getStock()-c.getQuantity();
+  	product.setStock(stock);
+  	productDaoImpl.editProduct(product);
+  	cartDaoImpl.deleteCart(c);
   	}
   	UserOrder userOrder =new UserOrder();
   	userOrder.setShippingAddress(shippingAddress);
   	userOrder.setUser(user);
 	userOrder.setGrandTotal(grandTotal);
 	userOrder.setPurchaseDate(new Date());
-	for(Cart cart:cartlist)
-	{
-		cartDaoImpl.deleteCart(cart);
-	}
-	
-	for(Cart cart:cartlist)
-	{
-int productid=	cart.getProductId();
- Product product=     productDaoImpl.getProduct(productid);
-int stock=product.getStock()-cart.getQuantity();
-product.setStock(stock);
-productDaoImpl.editProduct(product);
-}
 	orderDaoImpl.saveOrder(userOrder);
 	modelAndView.addObject("order", userOrder);
 	return modelAndView;

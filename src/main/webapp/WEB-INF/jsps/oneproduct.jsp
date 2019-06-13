@@ -10,8 +10,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:if test="${prolist.stock<5}">
+<h1><p color="green">stock was very less it may sold out in soon please complete your order quickly</p></h1>
+</c:if>
+<br>
 <img src="resources/product-images/${prolist.productId}.jpg" height="100" width="150"/>
-
 <br>
 productId:-${prolist.productId}
 <br>
@@ -23,6 +26,7 @@ productSupplier:-${prolist.productSupplier}
 <br>
 supplierAddress:-${suplist.supplierAddress}
 <br>
+product stock:-<td>${prolist.stock }</td>
 <form action="Cart" >
 Quantity<input type="number" name="k"max="7"min="1">
 <input type="hidden"  name="s" value="${prolist.productId}" >
@@ -30,6 +34,6 @@ Quantity<input type="number" name="k"max="7"min="1">
 </form>
 <a href="=${prolist.productId}">BuyNow</a>
  </tr>
-</table>
+ </table>
 </body>
 </html>
