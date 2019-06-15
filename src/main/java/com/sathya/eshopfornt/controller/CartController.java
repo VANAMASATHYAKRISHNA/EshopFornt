@@ -8,59 +8,65 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sathya.EshopBackEnd.DaoImpl.CartDaoImpl;
 import com.sathya.EshopBackEnd.DaoImpl.ProductDaoImpl;
-import com.sathya.EshopBackEnd.DaoImpl.UserDaoImpl;
 import com.sathya.EshopBackEnd.model.Cart;
 import com.sathya.EshopBackEnd.model.Product;
-import com.sathya.EshopBackEnd.model.User;
 
 
 @Controller
 public class CartController
 {
-	
 	@Autowired
 	ProductDaoImpl productDaoImpl;
 	@Autowired
 	CartDaoImpl cartDaoImpl;
-
-//	@RequestMapping("/addtocart")
-//	 public String Addtocart(@RequestParam("proId") int productId)
-//	 {
-//	Product product = productDaoImpl.getProduct(productId);
-//		 
-//	AddTOCart addTOCart=addToCartDaoImpl.getsavetocart(product);
-//		return null;
-//		 
-//	 }
-	@RequestMapping("/Cart")
-	 public ModelAndView Addtocart(HttpServletRequest httpServletRequest,HttpSession session)
-	 {
-		ModelAndView  modelAndView=new ModelAndView("userhome");
-		int productId = Integer.parseInt(httpServletRequest.getParameter("s"));
-		int quantity = Integer.parseInt(httpServletRequest.getParameter("k"));
+	@RequestMapping("/user")
+	 public ModelAndView userProductData()
+		{
+		List<Product> productlist=productDaoImpl.getProductList();
+			ModelAndView  modelAndView=new ModelAndView("userproducts");
+			modelAndView.addObject("prolist",productlist);
+			return modelAndView;
+		}
+	 @RequestMapping("viewdetails")
+	 public ModelAndView productDetails(@RequestParam("proId") int productId)
+		{
+		
 		Product product = productDaoImpl.getProduct(productId);
-	String userName=(String)	session.getAttribute("un");
-	System.out.println(userName);
-	Cart cart =new Cart();
-	if( cart.getCartid()==0)
-	{
-	boolean car=cartDaoImpl.saveCart(product, quantity,userName);
-	}
-	else
-	{
-		boolean car=cartDaoImpl.editCart(product, quantity,userName);
-	}
-		modelAndView.addObject("cartlist", cart);
-		return modelAndView;
+		ModelAndView  modelAndView=new ModelAndView("oneproduct");
+       modelAndView.addObject("car", new Cart());
+		modelAndView.addObject("prolist",product);
+	    return modelAndView;
+}
+	@PostMapping("/Cart")
+	 public ModelAndView Addtocart(@ModelAttribute("car") Cart cart,HttpSession session,HttpServletRequest httpServletRequest)
+	 {
+		  String userName=(String)	session.getAttribute("un");
+	      cart.setUsername(userName);
+	      int quantity=cart.getQuantity();
+		 cart.setQuantity(quantity);
+	cart.setTotalprice(cart.getProductPrice()*cart.getQuantity());
+	      ModelAndView  modelAndView=new ModelAndView("userhome");
+		 if(cart.getCartid()==0)
+		  {
+			  cartDaoImpl.saveCart(cart);  
+		  }
+		 else
+		 {
+			 cartDaoImpl.editCart(cart);
+		 }
+	      return modelAndView;
 	 }
-	@RequestMapping("/DisplayCart")
-	public ModelAndView displayCart( HttpSession httpSession) 
+    @RequestMapping("/DisplayCart")
+	public ModelAndView displayCart( HttpSession httpSession ) 
 	{
 		String userName=(String)	httpSession.getAttribute("un");
 		ModelAndView  modelAndView=new ModelAndView("Displaycart");
@@ -81,8 +87,10 @@ public class CartController
 	public ModelAndView editCartData(@RequestParam("cartId")int cartid)
 	{
 		ModelAndView  modelAndView=new ModelAndView("oneproduct");
+		
 		Cart cart=cartDaoImpl.getCart(cartid);
-		modelAndView.addObject("prolist", cart);
+		modelAndView.addObject("car", cart);
 		return modelAndView;
 }
+	
 }

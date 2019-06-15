@@ -107,22 +107,6 @@ public class ProductController
 		modelAndView.addObject("suplist", supplierlist);
 		 return modelAndView ;
 	 }
-	                              /*usermodule*/
-	 @RequestMapping("/user")
-	 public ModelAndView userProductData()
-		{
-		List<Product> productlist=productDaoImpl.getProductList();
-			ModelAndView  modelAndView=new ModelAndView("userproducts");
-			modelAndView.addObject("prolist",productlist);
-			return modelAndView;
-		}
-	 @RequestMapping("viewdetails")
-	 public ModelAndView productDetails(@RequestParam("proId") int productId)
-		{
-		
-		Product product = productDaoImpl.getProduct(productId);
-		ModelAndView  modelAndView=new ModelAndView("oneproduct");
-			modelAndView.addObject("prolist",product);
-			return modelAndView;
-}
+	                             
+	 
 }
