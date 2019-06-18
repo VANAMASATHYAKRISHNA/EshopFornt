@@ -43,7 +43,7 @@ return mv;
 public ModelAndView retrieveAllCategoryData()
 {
 List<Category> categoriesList=categoryDaoImpl.getCategoryList();
-    ModelAndView  modelAndView=new ModelAndView("Showcategory");
+ModelAndView  modelAndView=new ModelAndView("Showcategory");
     modelAndView.addObject("catlist", categoriesList);
     return modelAndView  ;
 }
@@ -59,7 +59,6 @@ categoryDaoImpl.deleteCategory(category);
 public ModelAndView editCategoryData(@RequestParam("catId") int categoryId)
 {
 Category category= categoryDaoImpl.getCategory(categoryId);
-
 ModelAndView  modelAndView=new ModelAndView("AddCategory");
  modelAndView.addObject("cat", category);
  modelAndView.addObject("ButtonName","UpdateCategory");

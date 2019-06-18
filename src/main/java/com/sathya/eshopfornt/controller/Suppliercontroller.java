@@ -19,67 +19,59 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sathya.EshopBackEnd.model.Supplier;
 
-
-
 @Controller
-public class Suppliercontroller
-{
+public class Suppliercontroller {
 	@Autowired
 	com.sathya.EshopBackEnd.DaoImpl.SupplierDaoImpl SupplierDaoImpl;
-	
-@RequestMapping("/Supplier")
-public ModelAndView goToSupplierform()
-	{
-	System.out.println("at supplier");
-ModelAndView  mv=new ModelAndView("AddSupplier");
-        
-        mv.addObject("sup",new Supplier());
-        mv.addObject("ButtonName","AddSupplier");
-        
-        return  mv;
+
+	@RequestMapping("/Supplier")
+	public ModelAndView goToSupplierform() {
+		System.out.println("at supplier");
+		ModelAndView mv = new ModelAndView("AddSupplier");
+
+		mv.addObject("sup", new Supplier());
+		mv.addObject("ButtonName", "AddSupplier");
+
+		return mv;
 	}
 
-	@RequestMapping(value="/addsup",method=RequestMethod.POST)
-	public ModelAndView recieveSupplierFormData(@ModelAttribute("sup") Supplier supplier)
-	{
-		ModelAndView  mv=new ModelAndView("AdminHome");
-	    System.out.println(supplier.getSupplierName());
+	@RequestMapping(value = "/addsup", method = RequestMethod.POST)
+	public ModelAndView recieveSupplierFormData(@ModelAttribute("sup") Supplier supplier) {
+		ModelAndView mv = new ModelAndView("AdminHome");
+		System.out.println(supplier.getSupplierName());
 		System.out.println(supplier.getSupplierDetails());
-		if(supplier.getSupplierId()==0)
-		{
-		SupplierDaoImpl.saveSupplier(supplier);
-		}
-		else
-		{
-			SupplierDaoImpl.editSupplier(supplier);	
+		if (supplier.getSupplierId() == 0) {
+			SupplierDaoImpl.saveSupplier(supplier);
+		} else {
+			SupplierDaoImpl.editSupplier(supplier);
 		}
 		return mv;
 	}
+
 	@RequestMapping("/ShowSupplierDetails")
-	public ModelAndView retrieveAllSupplierData()
-	{
-List<Supplier> supplierlist = SupplierDaoImpl.getSupplierList();
-ModelAndView modelAndView  =new ModelAndView("ShowSupplier");
-modelAndView.addObject("suplist", supplierlist);
-        return modelAndView   ;
+	public ModelAndView retrieveAllSupplierData() {
+		List<Supplier> supplierlist = SupplierDaoImpl.getSupplierList();
+		ModelAndView modelAndView = new ModelAndView("ShowSupplier");
+		modelAndView.addObject("suplist", supplierlist);
+		return modelAndView;
 	}
+
 	@RequestMapping("/sdel")
-	
-	public String deleteCategoryData(@RequestParam("supId")int supplierId)
-	{
-	Supplier supplier=SupplierDaoImpl.getSupplier(supplierId);
-	SupplierDaoImpl.deleteSupplier(supplier);
-    return "redirect:ShowSupplierDetails"   ;
-	
-} 
+
+	public String deleteCategoryData(@RequestParam("supId") int supplierId) {
+		Supplier supplier = SupplierDaoImpl.getSupplier(supplierId);
+		SupplierDaoImpl.deleteSupplier(supplier);
+		return "redirect:ShowSupplierDetails";
+
+	}
+
 	@RequestMapping("/sedit")
-	public ModelAndView editCategoryData(@RequestParam("supId")int supplierId)
-	{
-	Supplier supplier=	SupplierDaoImpl.getSupplier(supplierId);
-	SupplierDaoImpl.getSupplier(supplierId);
-ModelAndView modelAndView  =new ModelAndView("AddSupplier");
-modelAndView.addObject("sup", supplier);
-modelAndView.addObject("ButtonName","UpdateSupplier");
-        return modelAndView;
-        }
+	public ModelAndView editCategoryData(@RequestParam("supId") int supplierId) {
+		Supplier supplier = SupplierDaoImpl.getSupplier(supplierId);
+		SupplierDaoImpl.getSupplier(supplierId);
+		ModelAndView modelAndView = new ModelAndView("AddSupplier");
+		modelAndView.addObject("sup", supplier);
+		modelAndView.addObject("ButtonName", "UpdateSupplier");
+		return modelAndView;
+	}
 }

@@ -12,11 +12,10 @@
 </head>
 <body>
 <c:if test="${prolist.stock<5}">
-<h1><p>stock was very less it may sold out in soon please complete your order quickly<c:out value="${prolist.stock}"/></p></h1>
+<h1><p>stock was very less it may sold out in soon please complete your order quickly:<c:out value="${prolist.stock}"/>-only avalible</p></h1>
 </c:if>
 <br>
 <img src="resources/product-images/${prolist.productId}.jpg" height="100" width="150"/>
-<img src="resources/product-images/ ${car.productId}.jpg" height="100" width="150"/>
 <br>
 productId:-${prolist.productId}${car.productId}
 <br>
