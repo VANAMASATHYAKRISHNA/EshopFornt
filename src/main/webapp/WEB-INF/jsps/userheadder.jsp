@@ -20,7 +20,7 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Products<span class="caret"></span></a>
+					data-toggle="dropdown" href="#">Jewellery<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<c:forEach items="${catList}" var="cat">
 							<%-- <li><a href="user">${cat.categoryName}</a></li> --%>
@@ -36,6 +36,13 @@
 				<li class="nav-item"><a class="navbar-brand" href="#">Contactus</a>
 				<li class="nav-item"><a class="navbar-brand" href="logout">logout</a>
 				</li>
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">Jewellery<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<c:forEach items="${catList}" var="cat">
+							<%-- <li><a href="user">${cat.categoryName}</a></li> --%>
+							<li><a href="cName?categoryId=${cat.categoryId}">${cat.categoryName}</a></li>
+						</c:forEach>
 		</div>
 		</div>
 	</nav>
