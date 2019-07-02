@@ -27,24 +27,14 @@
 							<li><a href="cName?categoryId=${cat.categoryId}">${cat.categoryName}</a></li>
 						</c:forEach>
 					</ul>
-				<li class="nav-item"><a class="navbar-brand" href="DisplayCart">Displaycart</a>
-				<li class="nav-item"><a class="navbar-brand" href="myorder">MyOrders</a>
-				<li class="nav-item"><a class="navbar-brand"
-					href="Registration">Registration</a>
-				<li class="nav-item"><a class="navbar-brand" href="LOGIN">login</a>
-				<li class="nav-item"><a class="navbar-brand" href="#">Aboutus</a>
-				<li class="nav-item"><a class="navbar-brand" href="#">Contactus</a>
-				<li class="nav-item"><a class="navbar-brand" href="logout">logout</a>
-				</li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#">Jewellery<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<c:forEach items="${catList}" var="cat">
-							<%-- <li><a href="user">${cat.categoryName}</a></li> --%>
-							<li><a href="cName?categoryId=${cat.categoryId}">${cat.categoryName}</a></li>
-						</c:forEach>
-		</div>
-		</div>
+			    <li class="nav-item"><a class="navbar-brand" href="DisplayCart">Displaycart</a></li>
+				<li class="nav-item"><a class="navbar-brand" href="myorder">MyOrders</a></li>
+				<li class="nav-item"><a class="navbar-brand"href="Registration">Registration</a><li>
+				<li class="nav-item"><a class="navbar-brand" href="LOGIN">login</a></li>
+				<li class="nav-item"><a class="navbar-brand" href="#">Aboutus</a></li>
+				<li class="nav-item"><a class="navbar-brand" href="#">Contactus</a></li>
+				<li class="nav-item"><a class="navbar-brand" href="logout">logout</a></li></ul>
+		        </div>
 	</nav>
 </body>
 </html>

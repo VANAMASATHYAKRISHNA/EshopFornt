@@ -64,24 +64,13 @@ public class ProductController {
 		utilityFileUpload.fileUpload(product);
 		return "AdminHome";
 	}
-
-	// ============gettingproductdata based on categoryName===========//
-	@RequestMapping("/cName")
-	public ModelAndView getCategoryDataFormProduct(@RequestParam("categoryId") int categoryId) {
-		ModelAndView modelAndView = new ModelAndView("userproducts");
-		Category category = categoryDaoImpl.getCategory(categoryId);
-		List<Product> productlist = productDaoImpl.getProductList(category);
-		modelAndView.addObject("prolist", productlist);
-		return modelAndView;
-
-	}
-
-	// retrive productdata
+	                 // retrive productdata
 	@RequestMapping("/ShowProduct")
-	public ModelAndView reciveAllproductData(Category category) {
+	public ModelAndView reciveAllproductData() 
+	{
 		List<Product> productlist = productDaoImpl.getProductList();
 		ModelAndView modelAndView = new ModelAndView("ShowProduct");
-		List<Product> productlist1 = productDaoImpl.getProductList(category);
+		List<Product> productlist1 = productDaoImpl.getProductList();
 		modelAndView.addObject("prolist", productlist);
 		modelAndView.addObject("prolist", productlist1);
 		return modelAndView;
@@ -114,5 +103,29 @@ public class ProductController {
 		modelAndView.addObject("suplist", supplierlist);
 		return modelAndView;
 	}
-
+	// ============gettingproductdata based on categoryName===========//
+	@RequestMapping("/cName")
+	public ModelAndView getCategoryTypeDataFormProduct(@RequestParam("categoryId") int categoryId) {
+		ModelAndView modelAndView = new ModelAndView("userproducts");
+		Category category = categoryDaoImpl.getCategory(categoryId);
+	List<Product> productlist = productDaoImpl.getProductList(category);
+		modelAndView.addObject("prolist", productlist);
+		return modelAndView;
 }
+/*@RequestMapping("/cName")
+		public ModelAndView getCategoryNameDataFormProduct(@RequestParam("categoryId") int categoryId) {
+			ModelAndView modelAndView = new ModelAndView("userproducts");
+			Category category = categoryDaoImpl.getCategory(categoryId);
+		//	List<Product> productlist = productDaoImpl.getProductList(category);
+		//	modelAndView.addObject("prolist", productlist);
+			return modelAndView;
+		}
+@RequestMapping("/cUser")
+public ModelAndView getCategoryUserDataFormProduct(@RequestParam("categoryId") int categoryId) {
+	ModelAndView modelAndView = new ModelAndView("userproducts");
+	Category category = categoryDaoImpl.getCategory(categoryId);
+	//List<Product> productlist = productDaoImpl.getProductList(category);
+//	modelAndView.addObject("prolist", productlist);
+	return modelAndView;*/
+}	
+
